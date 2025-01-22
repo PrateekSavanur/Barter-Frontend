@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -45,7 +46,9 @@ export default function AddItemPage() {
 
   const LocationMarker = () => {
     useMapEvents({
-      click(e) {
+      click(e: {
+        latlng: { lat: { toString: () => any }; lng: { toString: () => any } };
+      }) {
         setLocation({
           lat: e.latlng.lat.toString(),
           long: e.latlng.lng.toString(),
