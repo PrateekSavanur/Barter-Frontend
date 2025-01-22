@@ -3,15 +3,15 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMapEvents,
-} from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+// import axios from "axios";
+// import {
+//   MapContainer,
+//   TileLayer,
+//   Marker,
+//   Popup,
+//   useMapEvents,
+// } from "react-leaflet";
+// import "leaflet/dist/leaflet.css";
 
 export default function AddItemPage() {
   const [itemName, setItemName] = useState("");
@@ -228,8 +228,8 @@ export default function AddItemPage() {
             Use Current Location
           </button>
           <div className="h-[300px] mt-4 rounded-lg overflow-hidden border border-gray-300 shadow-inner">
-            <MapContainer
-              center={[51.505, -0.09]}
+            {/* <MapContainer
+              center={[15.505, 10.09] as any}
               zoom={13}
               style={{ width: "100%", height: "100%" }}
             >
@@ -238,7 +238,7 @@ export default function AddItemPage() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               />
               <LocationMarker />
-            </MapContainer>
+            </MapContainer> */}
           </div>
           <div className="flex space-x-3 mt-4">
             <input
