@@ -4,14 +4,29 @@ import { useEffect, useState } from "react";
 import ItemCard from "./ItemCard";
 
 export default function Items() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  interface Item {
+    _id: string;
+    name: string;
+    category: string;
+    condition: string;
+    description: string;
+    desiredItems: string[];
+    images: string[];
+    owner: { _id: string; name: string };
+    availableForTrade: boolean;
+    location: { type: string; coordinates: [number, number] };
+    createdAt: string;
+    updatedAt: string;
+  }
 
   useEffect(() => {
     async function fetchItems() {
       try {
-        setLoading(true); // Start loading
+        setLoading(true);
         const response = await axios.get(
           "https://barter-backend-five.vercel.app/api/v1/items/"
         );
