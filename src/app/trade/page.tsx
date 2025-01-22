@@ -1,56 +1,37 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import axios from "axios";
-import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/auth-context";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
-// Disabling Static Generation (SSR)
-export async function getServerSideProps(context: {
-  req: { cookies: { authToken: unknown; user: string } };
-}) {
-  const authToken = context.req.cookies.authToken;
-  const user = context.req.cookies.user
-    ? JSON.parse(context.req.cookies.user)
-    : null;
-
-  if (!authToken) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { user }, // Pass the user object to the page
-  };
-}
-
-interface User {
-  _id: string;
-  email: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-const TradePage = ({ user }: { user: User }) => {
+const TradePage = () => {
   const [items, setItems] = useState<{ _id: string; name: string }[]>([]);
   const [selectedItem, setSelectedItem] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const searchParams = useSearchParams();
-  // const router = useRouter();
+  const router = useRouter();
   const { isAuthenticated } = useAuth();
+  const [user, setUser] = useState<any>(null);
 
   const recipientId = searchParams.get("recipientId");
   const itemId = searchParams.get("itemId");
 
   useEffect(() => {
-    if (!user) {
+    if (Cookies.get("authToken") === undefined) {
+      router.push("/login");
+    } else {
       setIsLoading(false);
-      return;
     }
+
+    if (Cookies.get("user")) {
+      setUser(JSON.parse(Cookies.get("user") || "{}"));
+    }
+  }, [router]);
+
+  useEffect(() => {
+    if (!user) return;
 
     const fetchOwnerItems = async () => {
       try {
@@ -63,13 +44,11 @@ const TradePage = ({ user }: { user: User }) => {
         setItems(response.data.items || []);
       } catch (error) {
         console.error("Error fetching items:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchOwnerItems();
-  }, [user]);
+  }, [isAuthenticated, user]);
 
   const handleItemChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedItem(event.target.value);
