@@ -13,6 +13,13 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
+declare module "react-leaflet" {
+  interface MapContainerProps {
+    center?: [number, number];
+    zoom?: number;
+  }
+}
+
 export default function AddItemPage() {
   const [itemName, setItemName] = useState("");
   const [description, setDescription] = useState("");
