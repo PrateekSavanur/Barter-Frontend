@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import axios from "axios";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -11,7 +12,8 @@ const TradePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated } = useAuth();
+  const [user, setUser] = useState<any>(null);
 
   const recipientId = searchParams.get("recipientId");
   const itemId = searchParams.get("itemId");
@@ -21,6 +23,10 @@ const TradePage = () => {
       router.push("/login");
     } else {
       setIsLoading(false);
+    }
+
+    if (Cookies.get("user")) {
+      setUser(JSON.parse(Cookies.get("user") || "{}"));
     }
   }, [router]);
 

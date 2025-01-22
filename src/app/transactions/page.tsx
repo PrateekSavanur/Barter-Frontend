@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/auth-context";
@@ -14,13 +15,15 @@ const TransactionPage = () => {
   }
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated } = useAuth();
+  const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true); // For loading state
   const router = useRouter();
 
   // Fetch transactions for the authenticated user
   useEffect(() => {
     if (!Cookies.get("authToken") && !Cookies.get("user")) {
+      setUser(JSON.parse(Cookies.get("user") || "{}"));
       router.push("/login");
       return;
     }
