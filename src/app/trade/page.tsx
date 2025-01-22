@@ -2,11 +2,11 @@
 "use client";
 import axios from "axios";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useAuth } from "../context/auth-context";
 import Cookies from "js-cookie";
 
-const TradePage = () => {
+const TradePageContent = () => {
   const [items, setItems] = useState<{ _id: string; name: string }[]>([]);
   const [selectedItem, setSelectedItem] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -152,5 +152,11 @@ const TradePage = () => {
     </div>
   );
 };
+
+const TradePage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <TradePageContent />
+  </Suspense>
+);
 
 export default TradePage;
