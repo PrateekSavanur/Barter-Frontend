@@ -28,7 +28,7 @@ const TransactionPage = () => {
     const fetchTransactions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/v1/transactions", // Adjust endpoint as needed
+          "https://barter-backend-five.vercel.app/api/v1/transactions", // Adjust endpoint as needed
           {
             params: {
               owner: user?._id,

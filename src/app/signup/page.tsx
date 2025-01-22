@@ -22,7 +22,7 @@ export default function SignupPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/users/signup",
+        "https://barter-backend-five.vercel.app/api/v1/users/signup",
         {
           name,
           email,

@@ -32,7 +32,7 @@ export default function ProfilePage() {
     async function fetchProfile() {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/v1/users/me",
+          "https://barter-backend-five.vercel.app/api/v1/users/me",
           {
             withCredentials: true,
           }

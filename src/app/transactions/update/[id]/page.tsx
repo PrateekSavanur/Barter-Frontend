@@ -18,7 +18,7 @@ export default function UpdateTransactionPage() {
     async function fetchTransaction() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/v1/transactions/${id}`,
+          `https://barter-backend-five.vercel.app/api/v1/transactions/${id}`,
           {
             withCredentials: true,
           }
@@ -40,7 +40,7 @@ export default function UpdateTransactionPage() {
     if (!newMessage && status) {
       try {
         const response = await axios.patch(
-          `http://localhost:3000/api/v1/transactions/update/${id}`,
+          `https://barter-backend-five.vercel.app/api/v1/transactions/update/${id}`,
           {
             status,
             message: newMessage,
@@ -71,7 +71,7 @@ export default function UpdateTransactionPage() {
     try {
       // Send the message to the server
       const response = await axios.patch(
-        `http://localhost:3000/api/v1/transactions/update/${id}`,
+        `https://barter-backend-five.vercel.app/api/v1/transactions/update/${id}`,
         {
           status,
           message: newMessage,

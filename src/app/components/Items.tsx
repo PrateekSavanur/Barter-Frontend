@@ -12,7 +12,9 @@ export default function Items() {
     async function fetchItems() {
       try {
         setLoading(true); // Start loading
-        const response = await axios.get("http://localhost:3000/api/v1/items/");
+        const response = await axios.get(
+          "https://barter-backend-five.vercel.app/api/v1/items/"
+        );
         console.log(response.data);
         setItems(response.data.items);
       } catch (err) {

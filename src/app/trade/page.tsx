@@ -29,9 +29,12 @@ const TradePage = () => {
 
     const fetchOwnerItems = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/v1/items", {
-          params: { ownerId: user._id },
-        });
+        const response = await axios.get(
+          "https://barter-backend-five.vercel.app/api/v1/items",
+          {
+            params: { ownerId: user._id },
+          }
+        );
         setItems(response.data.items || []);
       } catch (error) {
         console.error("Error fetching items:", error);
@@ -62,7 +65,7 @@ const TradePage = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/transactions/create",
+        "https://barter-backend-five.vercel.app/api/v1/transactions/create",
         transactionData,
         {
           withCredentials: true,

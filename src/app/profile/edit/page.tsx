@@ -25,7 +25,7 @@ export default function EditProfilePage() {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/v1/users/me",
+          "https://barter-backend-five.vercel.app/api/v1/users/me",
           {
             withCredentials: true,
           }
@@ -50,7 +50,7 @@ export default function EditProfilePage() {
 
     try {
       const response = await axios.patch(
-        "http://localhost:3000/api/v1/users/updateMe",
+        "https://barter-backend-five.vercel.app/api/v1/users/updateMe",
         { name, email },
         { withCredentials: true }
       );

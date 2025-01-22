@@ -15,7 +15,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     const response = await axios.post(
-      "http://localhost:3000/api/v1/users/login",
+      "https://barter-backend-five.vercel.app/api/v1/users/login",
       {
         email,
         password,
